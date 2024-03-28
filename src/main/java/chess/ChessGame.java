@@ -1,4 +1,4 @@
-package chess.controller;
+package chess;
 
 import chess.domain.board.Board;
 import chess.domain.board.BoardInitializer;
@@ -13,12 +13,12 @@ import chess.view.display.BoardDisplayConverter;
 import chess.view.display.RankDisplay;
 import java.util.List;
 
-public class ChessGameController {
+public class ChessGame {
 
     private final InputView inputView;
     private final OutputView outputView;
 
-    public ChessGameController(InputView inputView, OutputView outputView) {
+    public ChessGame(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
     }
