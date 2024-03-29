@@ -1,5 +1,8 @@
 package chess.domain.game;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import chess.domain.board.Board;
 import chess.domain.board.BoardInitializer;
 import chess.domain.piece.Color;
@@ -11,7 +14,6 @@ import chess.domain.position.Position;
 import chess.domain.position.Rank;
 import java.util.HashMap;
 import java.util.Map;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +23,7 @@ class WhiteTurnTest {
     @DisplayName("게임 시작 시 예외 발생")
     void startGameTest() {
         WhiteTurn whiteTurn = new WhiteTurn();
-        Assertions.assertThatThrownBy(whiteTurn::startGame)
+        assertThatThrownBy(whiteTurn::startGame)
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("게임은 이미 시작했습니다.");
     }
@@ -30,7 +32,7 @@ class WhiteTurnTest {
     @DisplayName("게임 종료 시 EndGame 반환")
     void endGameTest() {
         WhiteTurn whiteTurn = new WhiteTurn();
-        Assertions.assertThat(whiteTurn.endGame()).isInstanceOf(EndGame.class);
+        assertThat(whiteTurn.endGame()).isInstanceOf(EndGame.class);
     }
 
     @Test
@@ -40,7 +42,7 @@ class WhiteTurnTest {
         Board board = BoardInitializer.createBoard();
         Position source = Position.of(File.A, Rank.SEVEN);
         Position destination = Position.of(File.A, Rank.SIX);
-        Assertions.assertThat(whiteGame.playTurn(board, source, destination)).isInstanceOf(BlackTurn.class);
+        assertThat(whiteGame.playTurn(board, source, destination)).isInstanceOf(BlackTurn.class);
     }
 
     @Test
@@ -56,7 +58,7 @@ class WhiteTurnTest {
         Position destination = Position.of(File.E, Rank.EIGHT);
 
         GameState gameState = whiteTurn.playTurn(board, source, destination);
-        Assertions.assertThat(gameState).isInstanceOf(EndGame.class);
+        assertThat(gameState).isInstanceOf(EndGame.class);
     }
 
 }

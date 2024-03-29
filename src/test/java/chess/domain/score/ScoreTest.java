@@ -1,5 +1,7 @@
 package chess.domain.score;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import chess.domain.board.Board;
 import chess.domain.piece.Bishop;
 import chess.domain.piece.Color;
@@ -14,7 +16,6 @@ import chess.domain.position.Position;
 import chess.domain.position.Rank;
 import java.util.List;
 import java.util.Map;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +41,7 @@ class ScoreTest {
         List<Piece> survivePiece = board.survivePieceByColor(Color.WHITE);
 
         double whiteScore = score.calculateScoreByColor(survivePiece, Color.WHITE, 0);
-        Assertions.assertThat(whiteScore).isEqualTo(19.5);
+        assertThat(whiteScore).isEqualTo(19.5);
     }
 
     @Test
@@ -54,8 +55,6 @@ class ScoreTest {
         List<Piece> survivePiece = board.survivePieceByColor(Color.WHITE);
         double whiteScore = score.calculateScoreByColor(survivePiece, Color.WHITE,
                 board.countPawnInSameFile(Color.WHITE));
-        Assertions.assertThat(whiteScore).isEqualTo(1.0);
+        assertThat(whiteScore).isEqualTo(1.0);
     }
-
-
 }

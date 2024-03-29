@@ -2,6 +2,7 @@ package chess.domain.board;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import chess.domain.piece.Color;
 import chess.domain.piece.InitPawn;
@@ -13,7 +14,6 @@ import chess.domain.position.Position;
 import chess.domain.position.Rank;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -141,7 +141,7 @@ class BoardTest {
         board.move(source, destination);
         // then
         Piece actual = board.pieces().get(destination);
-        Assertions.assertAll(
+        assertAll(
                 () -> assertThat(board.pieces().containsKey(source)).isFalse(),
                 () -> assertThat(actual).isInstanceOf(Rook.class),
                 () -> assertThat(actual.hasColorOf(Color.WHITE)).isTrue()
@@ -161,7 +161,7 @@ class BoardTest {
         // when
         Piece removedPiece = board.move(source, destination);
         // then
-        Assertions.assertAll(
+        assertAll(
                 () -> assertThat(removedPiece).isInstanceOf(Rook.class),
                 () -> assertThat(removedPiece.hasColorOf(Color.BLACK)).isTrue()
         );

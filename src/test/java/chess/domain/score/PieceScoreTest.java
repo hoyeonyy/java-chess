@@ -1,5 +1,6 @@
 package chess.domain.score;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import chess.domain.piece.Color;
@@ -9,7 +10,6 @@ import chess.domain.piece.King;
 import chess.domain.piece.Piece;
 import chess.domain.piece.Queen;
 import chess.domain.piece.Rook;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ class PieceScoreTest {
 
         double score = PieceScore.addScore(queen);
 
-        Assertions.assertThat(score).isEqualTo(9);
+        assertThat(score).isEqualTo(9);
     }
 
     @Test
@@ -41,7 +41,7 @@ class PieceScoreTest {
 
         double score = PieceScore.addScore(king);
 
-        Assertions.assertThat(score).isEqualTo(0);
+        assertThat(score).isEqualTo(0);
     }
 
     @Test
@@ -51,7 +51,7 @@ class PieceScoreTest {
 
         double score = PieceScore.addScore(rook);
 
-        Assertions.assertThat(score).isEqualTo(5);
+        assertThat(score).isEqualTo(5);
     }
 
     @Test
@@ -61,7 +61,7 @@ class PieceScoreTest {
 
         double score = PieceScore.addScore(knight);
 
-        Assertions.assertThat(score).isEqualTo(2.5);
+        assertThat(score).isEqualTo(2.5);
     }
 
     @Test
@@ -71,7 +71,7 @@ class PieceScoreTest {
 
         double score = PieceScore.addScore(bishop);
 
-        Assertions.assertThat(score).isEqualTo(3);
+        assertThat(score).isEqualTo(3);
     }
 
     @Test
@@ -81,6 +81,6 @@ class PieceScoreTest {
 
         double score = PieceScore.addScore(pawn);
 
-        Assertions.assertThat(score).isEqualTo(1);
+        assertThat(score).isEqualTo(1);
     }
 }
