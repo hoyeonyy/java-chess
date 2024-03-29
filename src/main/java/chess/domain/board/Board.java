@@ -17,7 +17,7 @@ public class Board {
         this.pieces = pieces;
     }
 
-    public void move(Position source, Position destination) {
+    public Piece move(Position source, Position destination) {
         validatePieceExistsAt(source);
         validateAllyPieceNotOnDestination(source, destination);
         validateNoPiecesBetween(source, destination);
@@ -25,11 +25,10 @@ public class Board {
         Piece piece = pieces.get(source);
         if (hasEnemyPieceOn(destination, piece)) {
             validateAttackable(source, destination, piece);
-            replacePiece(source, destination, piece);
-            return;
+            return replacePiece(source, destination, piece);
         }
         validateMovable(source, destination, piece);
-        replacePiece(source, destination, piece);
+        return replacePiece(source, destination, piece);
     }
 
     private void validatePieceExistsAt(Position source) {
@@ -76,13 +75,15 @@ public class Board {
         }
     }
 
-    private void replacePiece(Position source, Position destination, Piece piece) {
+    private Piece replacePiece(Position source, Position destination, Piece piece) {
         pieces.remove(source);
+        Piece removePiece = pieces.get(destination);
         if (piece.isInitPawn()) {
             pieces.put(destination, new MovedPawn(piece.getColor()));
-            return;
+            return removePiece;
         }
         pieces.put(destination, piece);
+        return removePiece;
     }
 
     public List<Piece> survivePieceByColor(Color color) {

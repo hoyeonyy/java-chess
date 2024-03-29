@@ -147,4 +147,23 @@ class BoardTest {
                 () -> assertThat(actual.hasColorOf(Color.WHITE)).isTrue()
         );
     }
+
+    @Test
+    @DisplayName("제거된 기물을 반환한다.")
+    void removePiece() {
+        // given
+        Map<Position, Piece> pieces = new HashMap<>();
+        pieces.put(Position.of(File.A, Rank.ONE), new Rook(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.TWO), new Rook(Color.BLACK));
+        Board board = new Board(pieces);
+        Position source = Position.of(File.A, Rank.ONE);
+        Position destination = Position.of(File.A, Rank.TWO);
+        // when
+        Piece removedPiece = board.move(source, destination);
+        // then
+        Assertions.assertAll(
+                () -> assertThat(removedPiece).isInstanceOf(Rook.class),
+                () -> assertThat(removedPiece.hasColorOf(Color.BLACK)).isTrue()
+        );
+    }
 }
