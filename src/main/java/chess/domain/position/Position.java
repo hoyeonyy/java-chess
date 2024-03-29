@@ -1,8 +1,11 @@
 package chess.domain.position;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Position {
 
@@ -37,6 +40,12 @@ public class Position {
 
     public static Position of(File file, Rank rank) {
         return POSITION_POOL.get(toKey(file, rank));
+    }
+
+    public static List<Position> getPositionsSameFile(File file) {
+        return Arrays.stream(Rank.values())
+                .map(rank -> Position.of(file, rank))
+                .collect(Collectors.toList());
     }
 
     public Position createPositionByDifferencesOf(int fileDifference, int rankDifference) {

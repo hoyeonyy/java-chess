@@ -25,4 +25,9 @@ public class OutputView {
                 .toList();
         System.out.println(String.join(" ", notations));
     }
+
+    public void printScore(double whiteScore, double blackScore) {
+        System.out.println("white : " + whiteScore);
+        System.out.println("black : " + blackScore);
+    }
 }

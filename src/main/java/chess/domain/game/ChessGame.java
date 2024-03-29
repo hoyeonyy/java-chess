@@ -3,6 +3,7 @@ package chess.domain.game;
 import chess.domain.board.Board;
 import chess.domain.board.BoardInitializer;
 import chess.domain.piece.Color;
+import chess.domain.piece.Piece;
 import chess.domain.position.File;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
@@ -84,9 +85,14 @@ public class ChessGame {
 
     private void printStatus(Board board) {
         Score score = new Score();
-        double whiteScore = score.calculateScoreByColor(board.survivePieceByColor(Color.WHITE), Color.WHITE);
-        double blackScore = score.calculateScoreByColor(board.survivePieceByColor(Color.BLACK), Color.BLACK);
-        System.out.println(whiteScore);
-        System.out.println(blackScore);
+        int countWhitePawnInSameFile = board.countPawnInSameFile(Color.WHITE);
+        List<Piece> surviveWhitePieces = board.survivePieceByColor(Color.WHITE);
+        double whiteScore = score.calculateScoreByColor(surviveWhitePieces, Color.WHITE, countWhitePawnInSameFile);
+
+        int countBlackPawnInSameFile = board.countPawnInSameFile(Color.BLACK);
+        List<Piece> surviveBlackPieces = board.survivePieceByColor(Color.BLACK);
+        double blackScore = score.calculateScoreByColor(surviveBlackPieces, Color.BLACK, countBlackPawnInSameFile);
+
+        outputView.printScore(whiteScore, blackScore);
     }
 }

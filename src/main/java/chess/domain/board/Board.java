@@ -4,7 +4,9 @@ import chess.domain.piece.Color;
 import chess.domain.piece.Empty;
 import chess.domain.piece.MovedPawn;
 import chess.domain.piece.Piece;
+import chess.domain.position.File;
 import chess.domain.position.Position;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -92,6 +94,28 @@ public class Board {
         return pieces.values().stream()
                 .filter(piece -> piece.hasColorOf(color))
                 .collect(Collectors.toList());
+    }
+
+    public int countPawnInSameFile(Color color) {
+        return Arrays.stream(File.values())
+                .mapToInt(file -> countDuplicatePawnInFile(file, color))
+                .sum();
+    }
+
+    private int countDuplicatePawnInFile(File file, Color color) {
+        List<Position> positionsSameFile = Position.getPositionsSameFile(file);
+        int countPawn = countPawn(positionsSameFile, color);
+        if (countPawn >= 2) {
+            return countPawn;
+        }
+        return 0;
+    }
+
+    private int countPawn(List<Position> positionsSameFile, Color color) {
+        return (int) positionsSameFile.stream()
+                .map(position -> pieces.getOrDefault(position, new Empty()))
+                .filter(piece -> piece.isPawn() && piece.hasColorOf(color))
+                .count();
     }
 
     public Map<Position, Piece> pieces() {

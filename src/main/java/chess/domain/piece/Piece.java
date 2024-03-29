@@ -43,6 +43,14 @@ public abstract class Piece {
         return false;
     }
 
+    public boolean isKing() {
+        return this.getClass() == King.class;
+    }
+
+    public boolean isPawn() {
+        return this instanceof Pawn;
+    }
+
     public final boolean hasSameColorWith(Piece piece) {
         return this.color == piece.getColor();
     }
@@ -57,9 +65,5 @@ public abstract class Piece {
 
     public final Color getColor() {
         return color;
-    }
-
-    public boolean isKing() {
-        return this.getClass() == King.class;
     }
 }

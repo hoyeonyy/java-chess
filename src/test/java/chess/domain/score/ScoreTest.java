@@ -5,6 +5,7 @@ import chess.domain.piece.Bishop;
 import chess.domain.piece.Color;
 import chess.domain.piece.King;
 import chess.domain.piece.Knight;
+import chess.domain.piece.MovedPawn;
 import chess.domain.piece.Piece;
 import chess.domain.piece.Queen;
 import chess.domain.piece.Rook;
@@ -38,8 +39,22 @@ class ScoreTest {
         ));
         List<Piece> survivePiece = board.survivePieceByColor(Color.WHITE);
 
-        double whiteScore = score.calculateScoreByColor(survivePiece, Color.WHITE);
+        double whiteScore = score.calculateScoreByColor(survivePiece, Color.WHITE, 0);
         Assertions.assertThat(whiteScore).isEqualTo(19.5);
+    }
+
+    @Test
+    @DisplayName("같은 파일에 Pawn이 2개 이상 있으면 점수를 0.5 감소한다.")
+    void calculateScoreByColorWithPawn() {
+        Score score = new Score();
+        Board board = new Board(Map.of(
+                Position.of(File.A, Rank.ONE), new MovedPawn(Color.WHITE),
+                Position.of(File.A, Rank.TWO), new MovedPawn(Color.WHITE)
+        ));
+        List<Piece> survivePiece = board.survivePieceByColor(Color.WHITE);
+        double whiteScore = score.calculateScoreByColor(survivePiece, Color.WHITE,
+                board.countPawnInSameFile(Color.WHITE));
+        Assertions.assertThat(whiteScore).isEqualTo(1.0);
     }
 
 

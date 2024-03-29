@@ -166,4 +166,20 @@ class BoardTest {
                 () -> assertThat(removedPiece.hasColorOf(Color.BLACK)).isTrue()
         );
     }
+
+    @Test
+    @DisplayName("같은 파일 내에 Pawn의 갯수를 반환한다.")
+    void countPawnInSameFileTest() {
+        // given
+        Map<Position, Piece> pieces = new HashMap<>();
+        pieces.put(Position.of(File.A, Rank.TWO), new MovedPawn(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.THREE), new MovedPawn(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.FOUR), new MovedPawn(Color.WHITE));
+        pieces.put(Position.of(File.B, Rank.FOUR), new MovedPawn(Color.WHITE));
+        Board board = new Board(pieces);
+        // when
+        int count = board.countPawnInSameFile(Color.WHITE);
+        // then
+        assertThat(count).isEqualTo(3);
+    }
 }

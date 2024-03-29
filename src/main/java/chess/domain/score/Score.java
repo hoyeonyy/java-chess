@@ -6,11 +6,10 @@ import java.util.List;
 
 public class Score {
 
-    public double calculateScoreByColor(List<Piece> survivePiece, Color color) {
-        double score = 0.0;
-        for (Piece piece : survivePiece) {
-            score = score + PieceScore.addScore(piece);
-        }
-        return score;
+    public double calculateScoreByColor(List<Piece> survivePiece, Color color, int countPawnInSameFile) {
+        double totalScore = survivePiece.stream()
+                .mapToDouble(PieceScore::addScore)
+                .sum();
+        return totalScore - (countPawnInSameFile * 0.5);
     }
 }
