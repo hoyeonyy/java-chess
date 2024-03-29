@@ -41,4 +41,15 @@ class PieceTest {
         // then
         assertThat(result).isTrue();
     }
+
+    @Test
+    @DisplayName("Piece가 King 인지 테스트한다")
+    void isKingTest() {
+        // given
+        Piece piece = new King(Color.WHITE);
+        // when
+        boolean result = piece.isKing();
+        // then
+        assertThat(result).isTrue();
+    }
 }

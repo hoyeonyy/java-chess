@@ -58,4 +58,8 @@ public abstract class Piece {
     public final Color getColor() {
         return color;
     }
+
+    public boolean isKing() {
+        return this.getClass() == King.class;
+    }
 }

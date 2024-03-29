@@ -1,6 +1,7 @@
 package chess.domain.board;
 
 import chess.domain.piece.Color;
+import chess.domain.piece.Empty;
 import chess.domain.piece.MovedPawn;
 import chess.domain.piece.Piece;
 import chess.domain.position.Position;
@@ -28,7 +29,8 @@ public class Board {
             return replacePiece(source, destination, piece);
         }
         validateMovable(source, destination, piece);
-        return replacePiece(source, destination, piece);
+        replacePiece(source, destination, piece);
+        return new Empty();
     }
 
     private void validatePieceExistsAt(Position source) {

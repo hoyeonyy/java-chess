@@ -2,6 +2,7 @@ package chess.domain;
 
 import chess.domain.board.Board;
 import chess.domain.board.BoardInitializer;
+import chess.domain.piece.Piece;
 import chess.domain.position.File;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
@@ -38,19 +39,23 @@ public class ChessGame {
         printBoard(converter, board);
         Command command = inputView.readCommand();
         while (!command.isEnd()) {
-            proceedTurn(board, converter, command);
+            Piece removePiece = proceedTurn(board, converter, command);
+            if (removePiece.isKing()) {
+                return;
+            }
             command = inputView.readCommand();
         }
     }
 
-    private void proceedTurn(Board board, BoardDisplayConverter converter, Command command) {
+    private Piece proceedTurn(Board board, BoardDisplayConverter converter, Command command) {
         if (command.isStart()) {
             throw new IllegalArgumentException("이미 시작된 게임입니다.");
         }
         Position source = readPosition();
         Position destination = readPosition();
-        board.move(source, destination);
+        Piece removePiece = board.move(source, destination);
         printBoard(converter, board);
+        return removePiece;
     }
 
     private void printBoard(BoardDisplayConverter converter, Board board) {
