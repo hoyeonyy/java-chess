@@ -30,8 +30,8 @@ public enum PieceScore {
         return Arrays.stream(values())
                 .filter(value -> isSamePiece(piece, value))
                 .findFirst()
-                .map(PieceScore -> PieceScore.score)
-                .orElseThrow(() -> new IllegalArgumentException("잘못된 기물입니다."));
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 기물입니다."))
+                .score;
     }
 
     private static boolean isSamePiece(Piece piece, PieceScore value) {
