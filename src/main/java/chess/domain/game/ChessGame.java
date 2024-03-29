@@ -37,21 +37,22 @@ public class ChessGame {
     }
 
     private void playGame(Board board, BoardDisplayConverter converter) {
-        while (true) {
-            Command command = inputView.readCommand();
-            if (command.isStart()) {
-                startGame(board, converter);
-            }
-            if (command.isEnd()) {
-                endGame();
-                return;
-            }
-            if (command.isMove()) {
-                move(board, converter);
-            }
-            if (command.isStatus()) {
-                printStatus(board);
-            }
+        Command command = inputView.readCommand();
+        if (command.isStart()) {
+            startGame(board, converter);
+            playGame(board, converter);
+        }
+        if (command.isEnd()) {
+            endGame();
+            return;
+        }
+        if (command.isMove()) {
+            move(board, converter);
+            playGame(board, converter);
+        }
+        if (command.isStatus()) {
+            printStatus(board);
+            playGame(board, converter);
         }
     }
 
