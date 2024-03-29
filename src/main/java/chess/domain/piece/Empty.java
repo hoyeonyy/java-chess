@@ -1,11 +1,9 @@
 package chess.domain.piece;
 
-import chess.domain.position.Direction;
 import java.util.Collections;
-import java.util.List;
 
 public class Empty extends Piece {
-    public Empty(Color color, List<Direction> directions) {
+    public Empty() {
         super(Color.EMPTY, Collections.emptyList());
     }
 

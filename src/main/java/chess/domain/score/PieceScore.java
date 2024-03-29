@@ -7,6 +7,7 @@ import chess.domain.piece.Pawn;
 import chess.domain.piece.Piece;
 import chess.domain.piece.Queen;
 import chess.domain.piece.Rook;
+import java.util.Arrays;
 
 public enum PieceScore {
 
@@ -23,5 +24,17 @@ public enum PieceScore {
     PieceScore(Class<? extends Piece> pieceType, double score) {
         this.pieceType = pieceType;
         this.score = score;
+    }
+
+    public static double addScore(Piece piece) {
+        return Arrays.stream(values())
+                .filter(value -> isSamePiece(piece, value))
+                .findFirst()
+                .map(PieceScore -> PieceScore.score)
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 기물입니다."));
+    }
+
+    private static boolean isSamePiece(Piece piece, PieceScore value) {
+        return value.pieceType.isInstance(piece);
     }
 }

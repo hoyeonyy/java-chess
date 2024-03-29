@@ -1,10 +1,13 @@
 package chess.domain.board;
 
+import chess.domain.piece.Color;
 import chess.domain.piece.MovedPawn;
 import chess.domain.piece.Piece;
 import chess.domain.position.Position;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Board {
 
@@ -80,6 +83,12 @@ public class Board {
             return;
         }
         pieces.put(destination, piece);
+    }
+
+    public List<Piece> survivePieceByColor(Color color) {
+        return pieces.values().stream()
+                .filter(piece -> piece.hasColorOf(color))
+                .collect(Collectors.toList());
     }
 
     public Map<Position, Piece> pieces() {

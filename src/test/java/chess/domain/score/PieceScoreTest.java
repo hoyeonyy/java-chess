@@ -1,0 +1,86 @@
+package chess.domain.score;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import chess.domain.piece.Color;
+import chess.domain.piece.Empty;
+import chess.domain.piece.InitPawn;
+import chess.domain.piece.King;
+import chess.domain.piece.Piece;
+import chess.domain.piece.Queen;
+import chess.domain.piece.Rook;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+class PieceScoreTest {
+
+    @Test
+    @DisplayName("PieceScore에 해당하는 Piece가 아닌 경우 예외를 발생한다.")
+    void validatePieceType() {
+        Piece piece = new Empty();
+        assertThatThrownBy(() -> PieceScore.addScore(piece))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("잘못된 기물입니다.");
+    }
+
+    @Test
+    @DisplayName("Queen의 점수를 계산한다")
+    void calculateQueenScore() {
+        Piece queen = new Queen(Color.WHITE);
+
+        double score = PieceScore.addScore(queen);
+
+        Assertions.assertThat(score).isEqualTo(9);
+    }
+
+    @Test
+    @DisplayName("King의 점수를 계산한다")
+    void calculateKingScore() {
+        Piece king = new King(Color.WHITE);
+
+        double score = PieceScore.addScore(king);
+
+        Assertions.assertThat(score).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("Rook의 점수를 계산한다")
+    void calculateRookScore() {
+        Piece rook = new Rook(Color.WHITE);
+
+        double score = PieceScore.addScore(rook);
+
+        Assertions.assertThat(score).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("Knight의 점수를 계산한다")
+    void calculateKnightScore() {
+        Piece knight = new chess.domain.piece.Knight(Color.WHITE);
+
+        double score = PieceScore.addScore(knight);
+
+        Assertions.assertThat(score).isEqualTo(2.5);
+    }
+
+    @Test
+    @DisplayName("Bishop의 점수를 계산한다")
+    void calculateBishopScore() {
+        Piece bishop = new chess.domain.piece.Bishop(Color.WHITE);
+
+        double score = PieceScore.addScore(bishop);
+
+        Assertions.assertThat(score).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("Pawn의 점수를 계산한다")
+    void calculatePawnScore() {
+        Piece pawn = new InitPawn(Color.WHITE);
+
+        double score = PieceScore.addScore(pawn);
+
+        Assertions.assertThat(score).isEqualTo(1);
+    }
+}
