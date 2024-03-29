@@ -1,6 +1,6 @@
 package chess;
 
-import chess.domain.ChessGame;
+import chess.domain.game.ChessGame;
 import chess.view.InputView;
 import chess.view.OutputView;
 
