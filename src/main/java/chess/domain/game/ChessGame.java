@@ -1,7 +1,6 @@
 package chess.domain.game;
 
 import chess.domain.board.Board;
-import chess.domain.board.BoardInitializer;
 import chess.domain.piece.Color;
 import chess.domain.position.File;
 import chess.domain.position.Position;
@@ -23,39 +22,37 @@ public class ChessGame {
     public ChessGame(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
+        gameState = InitGame.createInitGame();
     }
 
     public void run() {
         outputView.printInitMessage();
-        Board board = BoardInitializer.createBoard();
-        BoardDisplayConverter converter = new BoardDisplayConverter();
-        gameState = new InitGame(board);
 
-        playGame(board, converter);
+        playGame(new BoardDisplayConverter());
     }
 
-    private void playGame(Board board, BoardDisplayConverter converter) {
+    private void playGame(BoardDisplayConverter converter) {
         Command command = inputView.readCommand();
         if (command.isStart()) {
-            startGame(board, converter);
-            playGame(board, converter);
+            startGame(converter);
+            playGame(converter);
         }
         if (command.isEnd()) {
             endGame();
             return;
         }
         if (command.isMove()) {
-            move(board, converter);
-            playGame(board, converter);
+            move(converter);
+            playGame(converter);
         }
         if (command.isStatus()) {
-            printStatus(board);
-            playGame(board, converter);
+            printStatus();
+            playGame(converter);
         }
     }
 
-    private void startGame(Board board, BoardDisplayConverter converter) {
-        printBoard(converter, board);
+    private void startGame(BoardDisplayConverter converter) {
+        printBoard(converter, gameState.getBoard());
         gameState = gameState.startGame();
     }
 
@@ -63,11 +60,11 @@ public class ChessGame {
         gameState = gameState.endGame();
     }
 
-    private void move(Board board, BoardDisplayConverter converter) {
+    private void move(BoardDisplayConverter converter) {
         Position source = readPosition();
         Position destination = readPosition();
         gameState = gameState.playTurn(source, destination);
-        printBoard(converter, board);
+        printBoard(converter, gameState.getBoard());
     }
 
     private Position readPosition() {
@@ -82,7 +79,8 @@ public class ChessGame {
         outputView.printBoard(rankDisplays);
     }
 
-    private void printStatus(Board board) {
+    private void printStatus() {
+        Board board = gameState.getBoard();
         double whiteScore = board.calculateScoreByColor(Color.WHITE);
         double blackScore = board.calculateScoreByColor(Color.BLACK);
 

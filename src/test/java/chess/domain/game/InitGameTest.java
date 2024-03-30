@@ -16,7 +16,7 @@ class InitGameTest {
     @Test
     @DisplayName("게임 시작 시 WhiteTurn 반환")
     void startGameTest() {
-        InitGame initGame = new InitGame(BoardInitializer.createBoard());
+        GameState initGame = InitGame.createInitGame();
         assertThat(initGame.startGame()).isInstanceOf(WhiteTurn.class);
 
     }
@@ -24,14 +24,14 @@ class InitGameTest {
     @Test
     @DisplayName("게임 종료 시 EndGame 반환")
     void endGameTest() {
-        InitGame initGame = new InitGame(BoardInitializer.createBoard());
+        GameState initGame = InitGame.createInitGame();
         assertThat(initGame.endGame()).isInstanceOf(EndGame.class);
     }
 
     @Test
     @DisplayName("게임 진행 시 예외 발생")
     void playTurnTest() {
-        InitGame initGame = new InitGame(BoardInitializer.createBoard());
+        GameState initGame = InitGame.createInitGame();
         Board board = BoardInitializer.createBoard();
         Position source = Position.of(File.A, Rank.SEVEN);
         Position destination = Position.of(File.A, Rank.SIX);

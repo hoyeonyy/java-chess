@@ -30,4 +30,9 @@ public class WhiteTurn implements GameState {
         }
         return new BlackTurn(board);
     }
+
+    @Override
+    public Board getBoard() {
+        return board;
+    }
 }

@@ -25,4 +25,9 @@ public class EndGame implements GameState {
     public GameState playTurn(Position source, Position destination) {
         throw new IllegalStateException("게임은 종료 되었습니다.");
     }
+
+    @Override
+    public Board getBoard() {
+        return board;
+    }
 }
