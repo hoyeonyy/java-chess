@@ -1,5 +1,7 @@
-package chess.domain.game;
+package chess;
 
+import chess.domain.game.GameState;
+import chess.domain.game.InitGame;
 import chess.domain.piece.Color;
 import chess.domain.piece.Piece;
 import chess.domain.position.File;
