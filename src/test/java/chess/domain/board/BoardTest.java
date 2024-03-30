@@ -4,10 +4,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
+import chess.domain.piece.Bishop;
 import chess.domain.piece.Color;
 import chess.domain.piece.InitPawn;
+import chess.domain.piece.King;
+import chess.domain.piece.Knight;
 import chess.domain.piece.MovedPawn;
 import chess.domain.piece.Piece;
+import chess.domain.piece.Queen;
 import chess.domain.piece.Rook;
 import chess.domain.position.File;
 import chess.domain.position.Position;
@@ -168,18 +172,34 @@ class BoardTest {
     }
 
     @Test
-    @DisplayName("같은 파일 내에 Pawn의 갯수를 반환한다.")
-    void countPawnInSameFileTest() {
-        // given
-        Map<Position, Piece> pieces = new HashMap<>();
-        pieces.put(Position.of(File.A, Rank.TWO), new MovedPawn(Color.WHITE));
-        pieces.put(Position.of(File.A, Rank.THREE), new MovedPawn(Color.WHITE));
-        pieces.put(Position.of(File.A, Rank.FOUR), new MovedPawn(Color.WHITE));
-        pieces.put(Position.of(File.B, Rank.FOUR), new MovedPawn(Color.WHITE));
-        Board board = new Board(pieces);
-        // when
-        int count = board.countPawnInSameFile(Color.WHITE);
-        // then
-        assertThat(count).isEqualTo(3);
+    @DisplayName("보드 정보와 색을 입력받아 점수를 계산한다.")
+    void calculateScoreByColor() {
+        Board board = new Board(Map.of(
+                Position.of(File.A, Rank.ONE), new Rook(Color.WHITE), // 5
+                Position.of(File.B, Rank.ONE), new Knight(Color.WHITE), // 2.5
+                Position.of(File.C, Rank.ONE), new Bishop(Color.WHITE), // 3
+                Position.of(File.D, Rank.ONE), new Queen(Color.WHITE), // 9
+                Position.of(File.E, Rank.ONE), new King(Color.WHITE), // 0
+
+                Position.of(File.A, Rank.EIGHT), new Rook(Color.BLACK),
+                Position.of(File.B, Rank.EIGHT), new Knight(Color.BLACK),
+                Position.of(File.C, Rank.EIGHT), new Bishop(Color.BLACK),
+                Position.of(File.D, Rank.EIGHT), new Queen(Color.BLACK),
+                Position.of(File.E, Rank.EIGHT), new King(Color.BLACK)
+        ));
+
+        double whiteScore = board.calculateScoreByColor(Color.WHITE);
+        assertThat(whiteScore).isEqualTo(19.5);
+    }
+
+    @Test
+    @DisplayName("같은 파일에 Pawn이 2개 이상 있으면 점수를 0.5 감소한다.")
+    void calculateScoreByColorWithPawn() {
+        Board board = new Board(Map.of(
+                Position.of(File.A, Rank.ONE), new MovedPawn(Color.WHITE),
+                Position.of(File.A, Rank.TWO), new MovedPawn(Color.WHITE)
+        ));
+        double whiteScore = board.calculateScoreByColor(Color.WHITE);
+        assertThat(whiteScore).isEqualTo(1.0);
     }
 }

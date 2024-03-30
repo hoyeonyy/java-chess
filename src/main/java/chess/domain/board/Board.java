@@ -6,6 +6,7 @@ import chess.domain.piece.MovedPawn;
 import chess.domain.piece.Piece;
 import chess.domain.position.File;
 import chess.domain.position.Position;
+import chess.domain.score.PieceScore;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -90,13 +91,22 @@ public class Board {
         return removePiece;
     }
 
-    public List<Piece> survivePieceByColor(Color color) {
+    public double calculateScoreByColor(Color color) {
+        List<Piece> survivePiece = survivePieceByColor(color);
+        int countPawnInSameFile = countPawnInSameFile(color);
+        double totalScore = survivePiece.stream()
+                .mapToDouble(PieceScore::addScore)
+                .sum();
+        return totalScore - (countPawnInSameFile * 0.5);
+    }
+
+    private List<Piece> survivePieceByColor(Color color) {
         return pieces.values().stream()
                 .filter(piece -> piece.hasColorOf(color))
                 .collect(Collectors.toList());
     }
 
-    public int countPawnInSameFile(Color color) {
+    private int countPawnInSameFile(Color color) {
         return Arrays.stream(File.values())
                 .mapToInt(file -> countDuplicatePawnInFile(file, color))
                 .sum();
