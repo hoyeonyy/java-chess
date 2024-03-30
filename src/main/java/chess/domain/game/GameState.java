@@ -1,7 +1,9 @@
 package chess.domain.game;
 
-import chess.domain.board.Board;
+import chess.domain.piece.Color;
+import chess.domain.piece.Piece;
 import chess.domain.position.Position;
+import java.util.Map;
 
 public interface GameState {
 
@@ -11,5 +13,7 @@ public interface GameState {
 
     GameState playTurn(Position source, Position destination);
 
-    Board getBoard();
+    Map<Position, Piece> getPieces();
+
+    double calculateScoreBy(Color color);
 }

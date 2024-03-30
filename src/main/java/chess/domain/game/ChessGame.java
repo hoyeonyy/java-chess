@@ -1,7 +1,7 @@
 package chess.domain.game;
 
-import chess.domain.board.Board;
 import chess.domain.piece.Color;
+import chess.domain.piece.Piece;
 import chess.domain.position.File;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
@@ -12,6 +12,7 @@ import chess.view.PositionDto;
 import chess.view.display.BoardDisplayConverter;
 import chess.view.display.RankDisplay;
 import java.util.List;
+import java.util.Map;
 
 public class ChessGame {
 
@@ -52,7 +53,7 @@ public class ChessGame {
     }
 
     private void startGame(BoardDisplayConverter converter) {
-        printBoard(converter, gameState.getBoard());
+        printBoard(converter, gameState.getPieces());
         gameState = gameState.startGame();
     }
 
@@ -64,7 +65,7 @@ public class ChessGame {
         Position source = readPosition();
         Position destination = readPosition();
         gameState = gameState.playTurn(source, destination);
-        printBoard(converter, gameState.getBoard());
+        printBoard(converter, gameState.getPieces());
     }
 
     private Position readPosition() {
@@ -74,15 +75,14 @@ public class ChessGame {
         return Position.of(file, rank);
     }
 
-    private void printBoard(BoardDisplayConverter converter, Board board) {
-        List<RankDisplay> rankDisplays = converter.convert(board.pieces());
+    private void printBoard(BoardDisplayConverter converter, Map<Position, Piece> pieces) {
+        List<RankDisplay> rankDisplays = converter.convert(pieces);
         outputView.printBoard(rankDisplays);
     }
 
     private void printStatus() {
-        Board board = gameState.getBoard();
-        double whiteScore = board.calculateScoreByColor(Color.WHITE);
-        double blackScore = board.calculateScoreByColor(Color.BLACK);
+        double whiteScore = gameState.calculateScoreBy(Color.WHITE);
+        double blackScore = gameState.calculateScoreBy(Color.BLACK);
 
         outputView.printScore(whiteScore, blackScore);
     }
