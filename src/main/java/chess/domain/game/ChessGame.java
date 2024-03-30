@@ -23,13 +23,13 @@ public class ChessGame {
     public ChessGame(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        gameState = new InitGame();
     }
 
     public void run() {
         outputView.printInitMessage();
         Board board = BoardInitializer.createBoard();
         BoardDisplayConverter converter = new BoardDisplayConverter();
+        gameState = new InitGame(board);
 
         playGame(board, converter);
     }
@@ -66,7 +66,7 @@ public class ChessGame {
     private void move(Board board, BoardDisplayConverter converter) {
         Position source = readPosition();
         Position destination = readPosition();
-        gameState = gameState.playTurn(board, source, destination);
+        gameState = gameState.playTurn(source, destination);
         printBoard(converter, board);
     }
 

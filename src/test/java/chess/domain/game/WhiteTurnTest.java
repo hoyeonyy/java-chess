@@ -22,7 +22,7 @@ class WhiteTurnTest {
     @Test
     @DisplayName("게임 시작 시 예외 발생")
     void startGameTest() {
-        WhiteTurn whiteTurn = new WhiteTurn();
+        WhiteTurn whiteTurn = new WhiteTurn(BoardInitializer.createBoard());
         assertThatThrownBy(whiteTurn::startGame)
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("게임은 이미 시작했습니다.");
@@ -31,33 +31,31 @@ class WhiteTurnTest {
     @Test
     @DisplayName("게임 종료 시 EndGame 반환")
     void endGameTest() {
-        WhiteTurn whiteTurn = new WhiteTurn();
+        WhiteTurn whiteTurn = new WhiteTurn(BoardInitializer.createBoard());
         assertThat(whiteTurn.endGame()).isInstanceOf(EndGame.class);
     }
 
     @Test
     @DisplayName("게임 진행 시 BlackTurn 반환")
     void playTurnTest() {
-        WhiteTurn whiteGame = new WhiteTurn();
-        Board board = BoardInitializer.createBoard();
+        WhiteTurn whiteGame = new WhiteTurn(BoardInitializer.createBoard());
         Position source = Position.of(File.A, Rank.SEVEN);
         Position destination = Position.of(File.A, Rank.SIX);
-        assertThat(whiteGame.playTurn(board, source, destination)).isInstanceOf(BlackTurn.class);
+        assertThat(whiteGame.playTurn(source, destination)).isInstanceOf(BlackTurn.class);
     }
 
     @Test
     @DisplayName("게임 진행 시 EndGame 반환")
     void playTurnTest2() {
-        WhiteTurn whiteTurn = new WhiteTurn();
-        Map<Position, Piece> map = new HashMap<>();
-        map.put(Position.of(File.E, Rank.SEVEN), new Rook(Color.WHITE));
-        map.put(Position.of(File.E, Rank.EIGHT), new King(Color.BLACK));
-        Board board = new Board(map);
+        Map<Position, Piece> pieces = new HashMap<>();
+        pieces.put(Position.of(File.E, Rank.SEVEN), new Rook(Color.WHITE));
+        pieces.put(Position.of(File.E, Rank.EIGHT), new King(Color.BLACK));
+        WhiteTurn whiteTurn = new WhiteTurn(new Board(pieces));
 
         Position source = Position.of(File.E, Rank.SEVEN);
         Position destination = Position.of(File.E, Rank.EIGHT);
 
-        GameState gameState = whiteTurn.playTurn(board, source, destination);
+        GameState gameState = whiteTurn.playTurn(source, destination);
         assertThat(gameState).isInstanceOf(EndGame.class);
     }
 
