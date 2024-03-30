@@ -12,6 +12,16 @@ public class Knight extends Piece {
     }
 
     @Override
+    public boolean isKing() {
+        return false;
+    }
+
+    @Override
+    public boolean isPawn() {
+        return false;
+    }
+
+    @Override
     public boolean isMovable(Position source, Position destination) {
         return source.isOnKnightRoute(destination);
     }

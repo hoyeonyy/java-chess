@@ -22,6 +22,16 @@ public class Queen extends Piece {
     }
 
     @Override
+    public boolean isKing() {
+        return false;
+    }
+
+    @Override
+    public boolean isPawn() {
+        return false;
+    }
+
+    @Override
     public int getMaxUnitMove() {
         return MAX_UNIT_MOVE;
     }

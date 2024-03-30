@@ -9,6 +9,16 @@ public class MovedPawn extends Pawn {
     }
 
     @Override
+    public boolean isKing() {
+        return false;
+    }
+
+    @Override
+    public boolean isPawn() {
+        return true;
+    }
+
+    @Override
     public int getMaxUnitMove() {
         return MAX_UNIT_MOVE;
     }

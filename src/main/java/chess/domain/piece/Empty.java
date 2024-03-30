@@ -8,6 +8,16 @@ public class Empty extends Piece {
     }
 
     @Override
+    public boolean isKing() {
+        return false;
+    }
+
+    @Override
+    public boolean isPawn() {
+        return false;
+    }
+
+    @Override
     public int getMaxUnitMove() {
         return 0;
     }

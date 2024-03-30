@@ -17,6 +17,10 @@ public abstract class Piece {
 
     public abstract int getMaxUnitMove();
 
+    public abstract boolean isKing();
+
+    public abstract boolean isPawn();
+
     public boolean isMovable(Position source, Position destination) {
         Direction direction = Direction.calculateBetween(source, destination);
         return matchesDirection(direction) &&
@@ -41,14 +45,6 @@ public abstract class Piece {
 
     public boolean isInitPawn() {
         return false;
-    }
-
-    public boolean isKing() {
-        return this.getClass() == King.class;
-    }
-
-    public boolean isPawn() {
-        return this instanceof Pawn;
     }
 
     public final boolean hasSameColorWith(Piece piece) {
