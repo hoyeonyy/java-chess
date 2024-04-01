@@ -11,6 +11,7 @@ public class OutputView {
         System.out.println("> 게임 시작: " + Command.START.getCommandName());
         System.out.println("> 게임 종료: " + Command.END.getCommandName());
         System.out.print("> 게임 이동 : " + Command.MOVE.getCommandName() + " source위치 target위치, ");
+        System.out.print("> 게임 불러오기 : " + Command.LOAD.getCommandName());
         System.out.println("예. " + Command.MOVE.getCommandName() + " b2 b3");
     }
 

@@ -1,5 +1,8 @@
 package chess;
 
+import chess.dao.ChessGameDao;
+import chess.dao.ChessGameDaoImpl;
+import chess.dao.PieceDaoImpl;
 import chess.domain.game.GameState;
 import chess.domain.game.InitGame;
 import chess.domain.piece.Color;
@@ -21,11 +24,20 @@ public class ChessGame {
     private final InputView inputView;
     private final OutputView outputView;
     private GameState gameState;
+    private final ChessGameDao chessGameDao;
 
-    public ChessGame(InputView inputView, OutputView outputView) {
-        this.inputView = inputView;
-        this.outputView = outputView;
+    public ChessGame() {
+        inputView = new InputView();
+        outputView = new OutputView();
         gameState = InitGame.createInitGame();
+        chessGameDao = new ChessGameDaoImpl(new PieceDaoImpl());
+    }
+
+    public ChessGame(GameState gameState) {
+        inputView = new InputView();
+        outputView = new OutputView();
+        this.gameState = gameState;
+        chessGameDao = new ChessGameDaoImpl(new PieceDaoImpl());
     }
 
     public void run() {
@@ -52,11 +64,16 @@ public class ChessGame {
             printStatus();
             playGame(converter);
         }
+        if (command.isLoad()) {
+            loadGame(converter);
+            playGame(converter);
+        }
     }
 
     private void startGame(BoardDisplayConverter converter) {
         printBoard(converter, gameState.getPieces());
         gameState = gameState.startGame();
+        chessGameDao.createChessGame(gameState);
     }
 
     private void endGame() {
@@ -67,6 +84,12 @@ public class ChessGame {
         Position source = readPosition();
         Position destination = readPosition();
         gameState = gameState.playTurn(source, destination);
+        printBoard(converter, gameState.getPieces());
+        chessGameDao.createChessGame(gameState);
+    }
+
+    private void loadGame(BoardDisplayConverter converter) {
+        gameState = chessGameDao.findGame();
         printBoard(converter, gameState.getPieces());
     }
 
