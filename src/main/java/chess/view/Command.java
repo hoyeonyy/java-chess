@@ -8,6 +8,7 @@ public enum Command {
     END("end"),
     MOVE("move"),
     STATUS("status"),
+    LOAD("load"),
     ;
 
     private final String commandName;
@@ -37,6 +38,10 @@ public enum Command {
 
     public boolean isMove() {
         return this == MOVE;
+    }
+
+    public boolean isLoad() {
+        return this == LOAD;
     }
 
     public String getCommandName() {

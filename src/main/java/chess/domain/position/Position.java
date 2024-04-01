@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Position {
@@ -113,20 +112,11 @@ public class Position {
         return !equals(other);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Position position = (Position) o;
-        return file == position.file && rank == position.rank;
+    public String getFileName() {
+        return file.name();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(file, rank);
+    public int getRankNumber() {
+        return rank.getNumber();
     }
 }
