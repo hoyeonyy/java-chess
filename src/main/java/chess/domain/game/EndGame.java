@@ -38,4 +38,9 @@ public class EndGame implements GameState {
     public double calculateScoreBy(Color color) {
         return board.calculateScoreByColor(color);
     }
+
+    @Override
+    public String getStateName() {
+        return "end";
+    }
 }

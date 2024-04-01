@@ -39,8 +39,8 @@ class BlackTurnTest {
     @DisplayName("게임 진행 시 WhiteTurn 반환")
     void playTurnTest() {
         Map<Position, Piece> pieces = new HashMap<>();
-        pieces.put(Position.of(File.B, Rank.SEVEN), new Rook(Color.BLACK));
-        pieces.put(Position.of(File.B, Rank.SIX), new Rook(Color.WHITE));
+        pieces.put(Position.of(File.B, Rank.SEVEN), Rook.getInstance(Color.BLACK));
+        pieces.put(Position.of(File.B, Rank.SIX), Rook.getInstance(Color.WHITE));
         BlackTurn blackTurn = new BlackTurn(new Board(pieces));
 
         Position source = Position.of(File.B, Rank.SEVEN);
@@ -52,8 +52,8 @@ class BlackTurnTest {
     @DisplayName("King을 잡았을 시 EndGame 반환")
     void playTurnCatchKingTest() {
         Map<Position, Piece> map = new HashMap<>();
-        map.put(Position.of(File.E, Rank.SEVEN), new Rook(Color.BLACK));
-        map.put(Position.of(File.E, Rank.EIGHT), new King(Color.WHITE));
+        map.put(Position.of(File.E, Rank.SEVEN), Rook.getInstance(Color.BLACK));
+        map.put(Position.of(File.E, Rank.EIGHT), King.getInstance(Color.WHITE));
         BlackTurn blackTurn = new BlackTurn(new Board(map));
 
         Position source = Position.of(File.E, Rank.SEVEN);

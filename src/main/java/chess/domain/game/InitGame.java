@@ -43,4 +43,9 @@ public class InitGame implements GameState {
     public double calculateScoreBy(Color color) {
         return board.calculateScoreByColor(color);
     }
+
+    @Override
+    public String getStateName() {
+        return "init";
+    }
 }

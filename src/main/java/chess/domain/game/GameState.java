@@ -16,4 +16,6 @@ public interface GameState {
     Map<Position, Piece> getPieces();
 
     double calculateScoreBy(Color color);
+
+    String getStateName();
 }
