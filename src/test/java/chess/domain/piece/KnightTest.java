@@ -16,7 +16,7 @@ class KnightTest {
     @DisplayName("나이트는 두 칸 전진한 뒤, 전진한 방향의 90도 좌/우 한 칸으로 이동할 수 있다")
     void knightMoveTest() {
         // given
-        Knight knight = new Knight(Color.WHITE);
+        Knight knight = Knight.getInstance(Color.WHITE);
         Position source = Position.of(File.D, Rank.FOUR);
         // when
         boolean movable = knight.isMovable(source, Position.of(File.F, Rank.FIVE));
@@ -29,7 +29,7 @@ class KnightTest {
     @DisplayName("나이트는 기본적인 8방향으로 움직일 수 없다.")
     void knightInvalidMoveTest(String file, int rank) {
         // given
-        Knight knight = new Knight(Color.WHITE);
+        Knight knight = Knight.getInstance(Color.WHITE);
         Position source = Position.of(File.D, Rank.FOUR);
         // when
         boolean movable = knight.isMovable(source, Position.of(File.from(file), Rank.from(rank)));

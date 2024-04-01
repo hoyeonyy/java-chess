@@ -41,8 +41,8 @@ class BoardTest {
     void allyPieceOnDestinationTest() {
         // given
         Map<Position, Piece> pieces = Map.of(
-                Position.of(File.A, Rank.ONE), new Rook(Color.WHITE),
-                Position.of(File.A, Rank.TWO), new Rook(Color.WHITE)
+                Position.of(File.A, Rank.ONE), Rook.getInstance(Color.WHITE),
+                Position.of(File.A, Rank.TWO), Rook.getInstance(Color.WHITE)
         );
         Board board = new Board(pieces);
         Position source = Position.of(File.A, Rank.ONE);
@@ -58,7 +58,7 @@ class BoardTest {
     void replaceInitPawnTest() {
         // given
         Map<Position, Piece> pieces = new HashMap<>();
-        pieces.put(Position.of(File.A, Rank.TWO), new InitPawn(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.TWO), InitPawn.getInstance(Color.WHITE));
         Board board = new Board(pieces);
         Position source = Position.of(File.A, Rank.TWO);
         Position destination = Position.of(File.A, Rank.THREE);
@@ -73,8 +73,8 @@ class BoardTest {
     void pawnAttackableTest() {
         // given
         Map<Position, Piece> pieces = new HashMap<>();
-        pieces.put(Position.of(File.A, Rank.TWO), new InitPawn(Color.WHITE));
-        pieces.put(Position.of(File.A, Rank.THREE), new MovedPawn(Color.BLACK));
+        pieces.put(Position.of(File.A, Rank.TWO), InitPawn.getInstance(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.THREE), MovedPawn.getInstance(Color.BLACK));
         Board board = new Board(pieces);
         Position source = Position.of(File.A, Rank.TWO);
         Position destination = Position.of(File.A, Rank.THREE);
@@ -89,8 +89,8 @@ class BoardTest {
     void pieceOnRouteTest() {
         // given
         Map<Position, Piece> pieces = new HashMap<>();
-        pieces.put(Position.of(File.A, Rank.ONE), new Rook(Color.WHITE));
-        pieces.put(Position.of(File.A, Rank.TWO), new Rook(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.ONE), Rook.getInstance(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.TWO), Rook.getInstance(Color.WHITE));
         Board board = new Board(pieces);
         Position source = Position.of(File.A, Rank.ONE);
         Position destination = Position.of(File.A, Rank.EIGHT);
@@ -105,7 +105,7 @@ class BoardTest {
     void invalidMoveTest() {
         // given
         Map<Position, Piece> pieces = new HashMap<>();
-        pieces.put(Position.of(File.A, Rank.ONE), new Rook(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.ONE), Rook.getInstance(Color.WHITE));
         Board board = new Board(pieces);
         Position source = Position.of(File.A, Rank.ONE);
         Position destination = Position.of(File.B, Rank.THREE);
@@ -120,7 +120,7 @@ class BoardTest {
     void moveTest() {
         // given
         Map<Position, Piece> pieces = new HashMap<>();
-        pieces.put(Position.of(File.A, Rank.ONE), new Rook(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.ONE), Rook.getInstance(Color.WHITE));
         Board board = new Board(pieces);
         Position source = Position.of(File.A, Rank.ONE);
         Position destination = Position.of(File.A, Rank.TWO);
@@ -136,8 +136,8 @@ class BoardTest {
     void attackTest() {
         // given
         Map<Position, Piece> pieces = new HashMap<>();
-        pieces.put(Position.of(File.A, Rank.ONE), new Rook(Color.WHITE));
-        pieces.put(Position.of(File.A, Rank.TWO), new Rook(Color.BLACK));
+        pieces.put(Position.of(File.A, Rank.ONE), Rook.getInstance(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.TWO), Rook.getInstance(Color.BLACK));
         Board board = new Board(pieces);
         Position source = Position.of(File.A, Rank.ONE);
         Position destination = Position.of(File.A, Rank.TWO);
@@ -157,8 +157,8 @@ class BoardTest {
     void removePiece() {
         // given
         Map<Position, Piece> pieces = new HashMap<>();
-        pieces.put(Position.of(File.A, Rank.ONE), new Rook(Color.WHITE));
-        pieces.put(Position.of(File.A, Rank.TWO), new Rook(Color.BLACK));
+        pieces.put(Position.of(File.A, Rank.ONE), Rook.getInstance(Color.WHITE));
+        pieces.put(Position.of(File.A, Rank.TWO), Rook.getInstance(Color.BLACK));
         Board board = new Board(pieces);
         Position source = Position.of(File.A, Rank.ONE);
         Position destination = Position.of(File.A, Rank.TWO);
@@ -175,17 +175,17 @@ class BoardTest {
     @DisplayName("보드 정보와 색을 입력받아 점수를 계산한다.")
     void calculateScoreByColor() {
         Board board = new Board(Map.of(
-                Position.of(File.A, Rank.ONE), new Rook(Color.WHITE), // 5
-                Position.of(File.B, Rank.ONE), new Knight(Color.WHITE), // 2.5
-                Position.of(File.C, Rank.ONE), new Bishop(Color.WHITE), // 3
-                Position.of(File.D, Rank.ONE), new Queen(Color.WHITE), // 9
-                Position.of(File.E, Rank.ONE), new King(Color.WHITE), // 0
+                Position.of(File.A, Rank.ONE), Rook.getInstance(Color.WHITE), // 5
+                Position.of(File.B, Rank.ONE), Knight.getInstance(Color.WHITE), // 2.5
+                Position.of(File.C, Rank.ONE), Bishop.getInstance(Color.WHITE), // 3
+                Position.of(File.D, Rank.ONE), Queen.getInstance(Color.WHITE), // 9
+                Position.of(File.E, Rank.ONE), King.getInstance(Color.WHITE), // 0
 
-                Position.of(File.A, Rank.EIGHT), new Rook(Color.BLACK),
-                Position.of(File.B, Rank.EIGHT), new Knight(Color.BLACK),
-                Position.of(File.C, Rank.EIGHT), new Bishop(Color.BLACK),
-                Position.of(File.D, Rank.EIGHT), new Queen(Color.BLACK),
-                Position.of(File.E, Rank.EIGHT), new King(Color.BLACK)
+                Position.of(File.A, Rank.EIGHT), Rook.getInstance(Color.BLACK),
+                Position.of(File.B, Rank.EIGHT), Knight.getInstance(Color.BLACK),
+                Position.of(File.C, Rank.EIGHT), Bishop.getInstance(Color.BLACK),
+                Position.of(File.D, Rank.EIGHT), Queen.getInstance(Color.BLACK),
+                Position.of(File.E, Rank.EIGHT), King.getInstance(Color.BLACK)
         ));
 
         double whiteScore = board.calculateScoreByColor(Color.WHITE);
@@ -196,8 +196,8 @@ class BoardTest {
     @DisplayName("같은 파일에 Pawn이 2개 이상 있으면 점수를 0.5 감소한다.")
     void calculateScoreByColorWithPawn() {
         Board board = new Board(Map.of(
-                Position.of(File.A, Rank.ONE), new MovedPawn(Color.WHITE),
-                Position.of(File.A, Rank.TWO), new MovedPawn(Color.WHITE)
+                Position.of(File.A, Rank.ONE), MovedPawn.getInstance(Color.WHITE),
+                Position.of(File.A, Rank.TWO), MovedPawn.getInstance(Color.WHITE)
         ));
         double whiteScore = board.calculateScoreByColor(Color.WHITE);
         assertThat(whiteScore).isEqualTo(1.0);

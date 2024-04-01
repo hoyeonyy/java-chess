@@ -15,8 +15,8 @@ class MovedPawnTest {
     @DisplayName("폰은 최대 한 칸만 전진할 수 있다.")
     void pawnMoveTest() {
         // given
-        MovedPawn whitePawn = new MovedPawn(Color.WHITE);
-        MovedPawn blackPawn = new MovedPawn(Color.BLACK);
+        MovedPawn whitePawn = MovedPawn.getInstance(Color.WHITE);
+        MovedPawn blackPawn = MovedPawn.getInstance(Color.BLACK);
         Position position = Position.of(File.B, Rank.THREE);
         // when, then
         assertAll(
@@ -29,8 +29,8 @@ class MovedPawnTest {
     @DisplayName("폰은 두 칸 이상 전진할 수 없다.")
     void pawnMaxUnitTest() {
         // given
-        MovedPawn whitePawn = new MovedPawn(Color.WHITE);
-        MovedPawn blackPawn = new MovedPawn(Color.BLACK);
+        MovedPawn whitePawn = MovedPawn.getInstance(Color.WHITE);
+        MovedPawn blackPawn = MovedPawn.getInstance(Color.BLACK);
         Position position = Position.of(File.B, Rank.THREE);
         // when, then
         assertAll(

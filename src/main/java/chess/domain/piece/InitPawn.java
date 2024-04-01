@@ -1,10 +1,17 @@
 package chess.domain.piece;
 
+import java.util.Map;
+
 public class InitPawn extends Pawn {
+
+    private static final Map<Color, InitPawn> INSTANCE = Map.of(
+            Color.WHITE, new InitPawn(Color.WHITE),
+            Color.BLACK, new InitPawn(Color.BLACK)
+    );
 
     private static final int MAX_UNIT_MOVE = 2;
 
-    public InitPawn(Color color) {
+    private InitPawn(Color color) {
         super(color);
     }
 
@@ -26,5 +33,9 @@ public class InitPawn extends Pawn {
     @Override
     public int getMaxUnitMove() {
         return MAX_UNIT_MOVE;
+    }
+
+    public static InitPawn getInstance(Color color) {
+        return INSTANCE.get(color);
     }
 }

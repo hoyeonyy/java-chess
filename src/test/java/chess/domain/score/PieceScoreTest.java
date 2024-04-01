@@ -3,10 +3,12 @@ package chess.domain.score;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import chess.domain.piece.Bishop;
 import chess.domain.piece.Color;
 import chess.domain.piece.Empty;
 import chess.domain.piece.InitPawn;
 import chess.domain.piece.King;
+import chess.domain.piece.Knight;
 import chess.domain.piece.Piece;
 import chess.domain.piece.Queen;
 import chess.domain.piece.Rook;
@@ -27,7 +29,7 @@ class PieceScoreTest {
     @Test
     @DisplayName("Queen의 점수를 계산한다")
     void calculateQueenScore() {
-        Piece queen = new Queen(Color.WHITE);
+        Piece queen = Queen.getInstance(Color.WHITE);
 
         double score = PieceScore.addScore(queen);
 
@@ -37,7 +39,7 @@ class PieceScoreTest {
     @Test
     @DisplayName("King의 점수를 계산한다")
     void calculateKingScore() {
-        Piece king = new King(Color.WHITE);
+        Piece king = King.getInstance(Color.WHITE);
 
         double score = PieceScore.addScore(king);
 
@@ -47,7 +49,7 @@ class PieceScoreTest {
     @Test
     @DisplayName("Rook의 점수를 계산한다")
     void calculateRookScore() {
-        Piece rook = new Rook(Color.WHITE);
+        Piece rook = Rook.getInstance(Color.WHITE);
 
         double score = PieceScore.addScore(rook);
 
@@ -57,7 +59,7 @@ class PieceScoreTest {
     @Test
     @DisplayName("Knight의 점수를 계산한다")
     void calculateKnightScore() {
-        Piece knight = new chess.domain.piece.Knight(Color.WHITE);
+        Piece knight = Knight.getInstance(Color.WHITE);
 
         double score = PieceScore.addScore(knight);
 
@@ -67,7 +69,7 @@ class PieceScoreTest {
     @Test
     @DisplayName("Bishop의 점수를 계산한다")
     void calculateBishopScore() {
-        Piece bishop = new chess.domain.piece.Bishop(Color.WHITE);
+        Piece bishop = Bishop.getInstance(Color.WHITE);
 
         double score = PieceScore.addScore(bishop);
 
@@ -77,7 +79,7 @@ class PieceScoreTest {
     @Test
     @DisplayName("Pawn의 점수를 계산한다")
     void calculatePawnScore() {
-        Piece pawn = new InitPawn(Color.WHITE);
+        Piece pawn = InitPawn.getInstance(Color.WHITE);
 
         double score = PieceScore.addScore(pawn);
 

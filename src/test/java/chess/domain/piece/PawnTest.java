@@ -15,8 +15,8 @@ class PawnTest {
     @DisplayName("폰은 대각선 전진 방향으로 공격할 수 있다.")
     void pawnAttackableTest() {
         // given
-        MovedPawn whitePawn = new MovedPawn(Color.WHITE);
-        MovedPawn blackPawn = new MovedPawn(Color.BLACK);
+        MovedPawn whitePawn = MovedPawn.getInstance(Color.WHITE);
+        MovedPawn blackPawn = MovedPawn.getInstance(Color.BLACK);
         Position position = Position.of(File.D, Rank.FOUR);
         // when, then
         assertAll(

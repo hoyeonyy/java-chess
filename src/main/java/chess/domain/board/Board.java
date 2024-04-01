@@ -84,7 +84,7 @@ public class Board {
         pieces.remove(source);
         Piece removePiece = pieces.get(destination);
         if (piece.isInitPawn()) {
-            pieces.put(destination, new MovedPawn(piece.getColor()));
+            pieces.put(destination, MovedPawn.getInstance(piece.getColor()));
             return removePiece;
         }
         pieces.put(destination, piece);

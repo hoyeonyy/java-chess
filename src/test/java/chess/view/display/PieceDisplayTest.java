@@ -14,7 +14,7 @@ class PieceDisplayTest {
     @DisplayName("말이 주어졌을 때 올바른 출력 형식으로 변환한다.")
     void notationConversionTest() {
         // given
-        Piece piece = new King(Color.WHITE);
+        Piece piece = King.getInstance(Color.WHITE);
         // when
         PieceDisplay display = PieceDisplay.getNotationByPiece(piece);
         // then

@@ -16,7 +16,7 @@ class QueenTest {
     @DisplayName("퀸은 상하좌우 및 대각선 방향으로 이동할 수 있다.")
     void queenMoveTest(String file, int rank) {
         // given
-        Queen queen = new Queen(Color.WHITE);
+        Queen queen = Queen.getInstance(Color.WHITE);
         Position source = Position.of(File.D, Rank.FOUR);
         // when
         boolean movable = queen.isMovable(source, Position.of(File.from(file), Rank.from(rank)));

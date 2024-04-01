@@ -19,7 +19,7 @@ class RookTest {
     @DisplayName("룩은 상하좌우 방향으로 이동할 수 있다.")
     void rookMoveTest(String file, int rank) {
         // given
-        Rook rook = new Rook(Color.WHITE);
+        Rook rook = Rook.getInstance(Color.WHITE);
         Position source = Position.of(File.D, Rank.FOUR);
         // when
         boolean movable = rook.isMovable(source, Position.of(File.from(file), Rank.from(rank)));
@@ -33,7 +33,7 @@ class RookTest {
     @DisplayName("룩이 이동할 수 없는 경우를 판단한다.")
     void rookInvalidMoveTest(Direction direction) {
         // given
-        Rook rook = new Rook(Color.WHITE);
+        Rook rook = Rook.getInstance(Color.WHITE);
         Position source = Position.of(File.D, Rank.FOUR);
         Position destination = direction.nextPosition(source);
         // when

@@ -20,7 +20,7 @@ class BishopTest {
     @DisplayName("비숍은 대각선 방향으로 이동할 수 있다")
     void bishopMoveTest(String file, int rank) {
         // given
-        Bishop bishop = new Bishop(Color.WHITE);
+        Bishop bishop = Bishop.getInstance(Color.WHITE);
         Position source = Position.of(File.D, Rank.FOUR);
         // when
         boolean movable = bishop.isMovable(source, Position.of(File.from(file), Rank.from(rank)));
@@ -32,7 +32,7 @@ class BishopTest {
     @DisplayName("비숍은 한 번에 여러 칸 이동할 수 있다.")
     void bishopMaxUnitTest() {
         // given
-        Bishop bishop = new Bishop(Color.WHITE);
+        Bishop bishop = Bishop.getInstance(Color.WHITE);
         Position source = Position.of(File.A, Rank.ONE);
         // when
         boolean movable = bishop.isMovable(source, Position.of(File.H, Rank.EIGHT));
@@ -45,7 +45,7 @@ class BishopTest {
     @DisplayName("비숍이 움직일 수 없는 경우를 판단한다.")
     void bishopInvalidMoveTest(Direction direction) {
         // given
-        Bishop bishop = new Bishop(Color.WHITE);
+        Bishop bishop = Bishop.getInstance(Color.WHITE);
         Position source = Position.of(File.D, Rank.FOUR);
         Position destination = direction.nextPosition(source);
         // when

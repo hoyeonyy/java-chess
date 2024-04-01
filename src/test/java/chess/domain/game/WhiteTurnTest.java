@@ -48,8 +48,8 @@ class WhiteTurnTest {
     @DisplayName("게임 진행 시 EndGame 반환")
     void playTurnTest2() {
         Map<Position, Piece> pieces = new HashMap<>();
-        pieces.put(Position.of(File.E, Rank.SEVEN), new Rook(Color.WHITE));
-        pieces.put(Position.of(File.E, Rank.EIGHT), new King(Color.BLACK));
+        pieces.put(Position.of(File.E, Rank.SEVEN), Rook.getInstance(Color.WHITE));
+        pieces.put(Position.of(File.E, Rank.EIGHT), King.getInstance(Color.BLACK));
         WhiteTurn whiteTurn = new WhiteTurn(new Board(pieces));
 
         Position source = Position.of(File.E, Rank.SEVEN);

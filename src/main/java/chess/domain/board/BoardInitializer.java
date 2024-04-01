@@ -32,32 +32,32 @@ public class BoardInitializer {
     }
 
     private static void createWhitePieces() {
-        PIECES.put(Position.of(File.A, WHITE_PIECES_RANK), new Rook(Color.WHITE));
-        PIECES.put(Position.of(File.B, WHITE_PIECES_RANK), new Knight(Color.WHITE));
-        PIECES.put(Position.of(File.C, WHITE_PIECES_RANK), new Bishop(Color.WHITE));
-        PIECES.put(Position.of(File.D, WHITE_PIECES_RANK), new Queen(Color.WHITE));
-        PIECES.put(Position.of(File.E, WHITE_PIECES_RANK), new King(Color.WHITE));
-        PIECES.put(Position.of(File.F, WHITE_PIECES_RANK), new Bishop(Color.WHITE));
-        PIECES.put(Position.of(File.G, WHITE_PIECES_RANK), new Knight(Color.WHITE));
-        PIECES.put(Position.of(File.H, WHITE_PIECES_RANK), new Rook(Color.WHITE));
+        PIECES.put(Position.of(File.A, WHITE_PIECES_RANK), Rook.getInstance(Color.WHITE));
+        PIECES.put(Position.of(File.B, WHITE_PIECES_RANK), Knight.getInstance(Color.WHITE));
+        PIECES.put(Position.of(File.C, WHITE_PIECES_RANK), Bishop.getInstance(Color.WHITE));
+        PIECES.put(Position.of(File.D, WHITE_PIECES_RANK), Queen.getInstance(Color.WHITE));
+        PIECES.put(Position.of(File.E, WHITE_PIECES_RANK), King.getInstance(Color.WHITE));
+        PIECES.put(Position.of(File.F, WHITE_PIECES_RANK), Bishop.getInstance(Color.WHITE));
+        PIECES.put(Position.of(File.G, WHITE_PIECES_RANK), Knight.getInstance(Color.WHITE));
+        PIECES.put(Position.of(File.H, WHITE_PIECES_RANK), Rook.getInstance(Color.WHITE));
         createPawns(WHITE_PAWN_RANK, Color.WHITE);
     }
 
     private static void createBlackPieces() {
-        PIECES.put(Position.of(File.A, BLACK_PIECES_RANK), new Rook(Color.BLACK));
-        PIECES.put(Position.of(File.B, BLACK_PIECES_RANK), new Knight(Color.BLACK));
-        PIECES.put(Position.of(File.C, BLACK_PIECES_RANK), new Bishop(Color.BLACK));
-        PIECES.put(Position.of(File.D, BLACK_PIECES_RANK), new Queen(Color.BLACK));
-        PIECES.put(Position.of(File.E, BLACK_PIECES_RANK), new King(Color.BLACK));
-        PIECES.put(Position.of(File.F, BLACK_PIECES_RANK), new Bishop(Color.BLACK));
-        PIECES.put(Position.of(File.G, BLACK_PIECES_RANK), new Knight(Color.BLACK));
-        PIECES.put(Position.of(File.H, BLACK_PIECES_RANK), new Rook(Color.BLACK));
+        PIECES.put(Position.of(File.A, BLACK_PIECES_RANK), Rook.getInstance(Color.BLACK));
+        PIECES.put(Position.of(File.B, BLACK_PIECES_RANK), Knight.getInstance(Color.BLACK));
+        PIECES.put(Position.of(File.C, BLACK_PIECES_RANK), Bishop.getInstance(Color.BLACK));
+        PIECES.put(Position.of(File.D, BLACK_PIECES_RANK), Queen.getInstance(Color.BLACK));
+        PIECES.put(Position.of(File.E, BLACK_PIECES_RANK), King.getInstance(Color.BLACK));
+        PIECES.put(Position.of(File.F, BLACK_PIECES_RANK), Bishop.getInstance(Color.BLACK));
+        PIECES.put(Position.of(File.G, BLACK_PIECES_RANK), Knight.getInstance(Color.BLACK));
+        PIECES.put(Position.of(File.H, BLACK_PIECES_RANK), Rook.getInstance(Color.BLACK));
         createPawns(BLACK_PAWN_RANK, Color.BLACK);
     }
 
     private static void createPawns(Rank rank, Color color) {
         for (File file : File.values()) {
-            PIECES.put(Position.of(file, rank), new InitPawn(color));
+            PIECES.put(Position.of(file, rank), InitPawn.getInstance(color));
         }
     }
 

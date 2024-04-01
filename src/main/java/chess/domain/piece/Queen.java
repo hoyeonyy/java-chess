@@ -2,10 +2,10 @@ package chess.domain.piece;
 
 import chess.domain.position.Direction;
 import java.util.List;
+import java.util.Map;
 
 public class Queen extends Piece {
 
-    private static final int MAX_UNIT_MOVE = 7;
     private static final List<Direction> QUEEN_DIRECTION = List.of(
             Direction.POSITIVE_FILE_POSITIVE_RANK,
             Direction.POSITIVE_FILE_NEGATIVE_RANK,
@@ -17,8 +17,19 @@ public class Queen extends Piece {
             Direction.SAME_FILE_NEGATIVE_RANK
     );
 
-    public Queen(Color color) {
+    private static final Map<Color, Queen> INSTANCE = Map.of(
+            Color.WHITE, new Queen(Color.WHITE, QUEEN_DIRECTION),
+            Color.BLACK, new Queen(Color.BLACK, QUEEN_DIRECTION)
+    );
+
+    private static final int MAX_UNIT_MOVE = 7;
+
+    private Queen(Color color) {
         super(color, QUEEN_DIRECTION);
+    }
+
+    private Queen(Color color, List<Direction> directions) {
+        super(color, directions);
     }
 
     @Override
@@ -34,5 +45,9 @@ public class Queen extends Piece {
     @Override
     public int getMaxUnitMove() {
         return MAX_UNIT_MOVE;
+    }
+
+    public static Queen getInstance(Color color) {
+        return INSTANCE.get(color);
     }
 }

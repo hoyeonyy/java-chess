@@ -12,8 +12,8 @@ class PieceTest {
     @DisplayName("같은 색깔의 Piece가 들어오면 true를 반환한다.")
     void hasSameColorWith() {
         // given
-        Piece piece = new King(Color.WHITE);
-        Piece otherPiece = new King(Color.WHITE);
+        Piece piece = King.getInstance(Color.WHITE);
+        Piece otherPiece = King.getInstance(Color.WHITE);
         // when
         boolean result = piece.hasSameColorWith(otherPiece);
         // then
@@ -24,8 +24,8 @@ class PieceTest {
     @DisplayName("다른 색깔의 Piece가 들어오면 false를 반환한다.")
     void hasDifferentColorWith() {
         // given
-        Piece piece = new King(Color.WHITE);
-        Piece otherPiece = new King(Color.BLACK);
+        Piece piece = King.getInstance(Color.WHITE);
+        Piece otherPiece = King.getInstance(Color.BLACK);
         // when
         boolean result = piece.hasSameColorWith(otherPiece);
         // then
@@ -36,7 +36,7 @@ class PieceTest {
     @DisplayName("Piece의 색깔을 체크한다.")
     void hasColorOf() {
         // given
-        Piece piece = new King(Color.WHITE);
+        Piece piece = King.getInstance(Color.WHITE);
         // when
         boolean result = piece.hasColorOf(Color.WHITE);
         // then
@@ -47,7 +47,7 @@ class PieceTest {
     @DisplayName("Piece가 King 인지 테스트한다")
     void isKingTest() {
         // given
-        Piece piece = new King(Color.WHITE);
+        Piece piece = King.getInstance(Color.WHITE);
         // when
         boolean result = piece.isKing();
         // then
@@ -58,8 +58,8 @@ class PieceTest {
     @DisplayName("Piece가 Pawn 인지 테스트한다")
     void isPawnTest() {
         // given
-        Piece initPawn = new InitPawn(Color.WHITE);
-        Piece movedPawn = new MovedPawn(Color.WHITE);
+        Piece initPawn = InitPawn.getInstance(Color.WHITE);
+        Piece movedPawn = MovedPawn.getInstance(Color.WHITE);
         // when
         boolean isInitPawn = initPawn.isPawn();
         boolean isMovedPawn = movedPawn.isPawn();

@@ -21,7 +21,7 @@ class PathTest {
         Position source = Position.of(File.A, Rank.ONE);
         Position destination = Position.of(File.H, Rank.EIGHT);
         Map<Position, Piece> pieces = Map.of(
-                Position.of(File.D, Rank.FOUR), new Rook(Color.WHITE)
+                Position.of(File.D, Rank.FOUR), Rook.getInstance(Color.WHITE)
         );
         Path path = Path.createExcludingBothEnds(source, destination);
         // when
