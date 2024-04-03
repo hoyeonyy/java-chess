@@ -13,11 +13,14 @@ import java.util.Map;
 
 public class PieceDaoImpl implements PieceDao {
 
+    private static final String DELETE_FROM_PIECE = "DELETE FROM piece";
+    private static final String SELECT_FROM_PIECE = "SELECT file, `rank`, type, color FROM piece";
+    private static final String INSERT_FROM_PIECE = "INSERT INTO piece (file, `rank`, type, color) VALUES (?, ?, ?, ?)";
+
     @Override
     public void saveAllPieces(Map<Position, Piece> pieces) {
         try (Connection connection = DbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "INSERT INTO piece (file, `rank`, type, color) VALUES (?, ?, ?, ?)")) {
+             PreparedStatement statement = connection.prepareStatement(INSERT_FROM_PIECE)) {
             removePieces();
             for (Map.Entry<Position, Piece> entry : pieces.entrySet()) {
                 Position position = entry.getKey();
@@ -37,8 +40,7 @@ public class PieceDaoImpl implements PieceDao {
     @Override
     public Map<Position, Piece> findPieces() {
         try (Connection connection = DbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT file, `rank`, type, color FROM piece")) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_FROM_PIECE)) {
             ResultSet resultSet = statement.executeQuery();
             return mapToPieces(resultSet);
         } catch (SQLException e) {
@@ -61,8 +63,7 @@ public class PieceDaoImpl implements PieceDao {
     @Override
     public void removePieces() {
         try (Connection connection = DbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "DELETE FROM piece")) {
+             PreparedStatement statement = connection.prepareStatement(DELETE_FROM_PIECE)) {
             statement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

@@ -15,6 +15,9 @@ import java.sql.SQLException;
 import java.util.Map;
 
 public class ChessGameDaoImpl implements ChessGameDao {
+    private static final String INSERT_FROM_CHESSGAME = "INSERT INTO chess_game (state) VALUES (?)";
+    private static final String SELECT_FROM_CHESSGAME = "SELECT state FROM chess_game";
+    private static final String DELETE_FROM_CHESS_GAME = "DELETE FROM chess_game";
     private final PieceDao pieceDao;
 
     public ChessGameDaoImpl(PieceDao pieceDao) {
@@ -24,8 +27,7 @@ public class ChessGameDaoImpl implements ChessGameDao {
     @Override
     public void createChessGame(GameState gameState) {
         try (Connection connection = DbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "INSERT INTO chess_game (state) VALUES (?)")) {
+             PreparedStatement statement = connection.prepareStatement(INSERT_FROM_CHESSGAME)) {
             statement.setString(1, gameState.getStateName());
             removeGame();
             statement.executeUpdate();
@@ -38,8 +40,7 @@ public class ChessGameDaoImpl implements ChessGameDao {
     @Override
     public GameState findGame() {
         try (Connection connection = DbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT state FROM chess_game")) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_FROM_CHESSGAME)) {
             return retrieveChessGameFrom(statement.executeQuery());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -68,8 +69,7 @@ public class ChessGameDaoImpl implements ChessGameDao {
     @Override
     public void removeGame() {
         try (Connection connection = DbConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "DELETE FROM chess_game")) {
+             PreparedStatement statement = connection.prepareStatement(DELETE_FROM_CHESS_GAME)) {
             pieceDao.removePieces();
             statement.executeUpdate();
         } catch (SQLException e) {
