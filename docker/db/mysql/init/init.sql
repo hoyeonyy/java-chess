@@ -1,3 +1,5 @@
+CREATE DATABASE chess;
+
 USE chess;
 
 CREATE TABLE chess_game
